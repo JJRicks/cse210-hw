@@ -31,7 +31,7 @@ class Program
                     break;
                 case 4:
                     break;
-                case 5:
+                case 0:
                     Console.WriteLine("Exiting...");
                     return;
                 default:
@@ -47,7 +47,7 @@ class Program
         Console.WriteLine("2. Display Entries");
         Console.WriteLine("3. Save journal state");
         Console.WriteLine("4. Load journal state from file");
-        Console.WriteLine("5. Exit");
+        Console.WriteLine("0. Exit");
         Console.Write("Please select from the above options: (1, 2, 3...) ");
     }
 
