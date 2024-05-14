@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 
 class Program
 {
@@ -6,6 +7,7 @@ class Program
     {
         Console.WriteLine("Welcome to Journal.");
         //TODO You have $x unsaved entries 
+        Journal journal = new Journal();
         int userChoice;
         while (true) {
             displayMenu();
@@ -15,25 +17,26 @@ class Program
             } 
             catch (Exception) {
                 Console.WriteLine("\nNot an int, please try again.\n");
+                continue; 
             }
             
-            if (userChoice == 1) {
-
-            }
-            else if (userChoice == 2) {
-
-            }
-            else if (userChoice == 3) {
-
-            }
-            else if (userChoice == 4) {
-
-            }
-            else if (userChoice == 5) {
-                break;
-            }
-            else {
-                Console.WriteLine("Not an option, please try again.");
+            switch (userChoice) {
+                case 1:
+                    journal.addEntry();
+                    break;
+                case 2:
+                    journal.displayEntries();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    Console.WriteLine("Exiting...");
+                    return;
+                default:
+                    Console.WriteLine("Not an option, please try again.");
+                    break;
             }
         }
         

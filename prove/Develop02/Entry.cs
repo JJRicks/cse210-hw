@@ -7,7 +7,7 @@ class Entry {
     public string Title { get; set;} // TODO add logic to make sure it's not empty/valid on all these
     public string Body { get; set; } 
 
-    public Entry() {
+    public Entry() {  // constructor 
         entryTotalCount++;
         EntryNumber = entryTotalCount;   
     }
