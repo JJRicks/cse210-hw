@@ -84,11 +84,10 @@ class Journal {
         try {
             string jsonString = JsonSerializer.Serialize(entries, new JsonSerializerOptions {WriteIndented = true});
             File.WriteAllText(fileName, jsonString);
-
             Console.WriteLine(fileName + " saved to successfully to " + Directory.GetCurrentDirectory());
         }
-        catch {
-
+        catch (Exception e) {
+            Console.WriteLine(e.Message);
         }
     }
     public void loadFile() {
