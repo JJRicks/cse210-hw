@@ -28,6 +28,7 @@ class Program
                     journal.displayEntries();
                     break;
                 case 3:
+                    journal.saveFile();
                     break;
                 case 4:
                     break;
