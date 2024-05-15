@@ -1,11 +1,9 @@
 using System;
 
 class Entry {
-
     private static int entryTotalCount = 0;
     public int EntryNumber { get; private set; }
    
-
     private string title;
     public string Title { 
         get { return title; }
@@ -17,8 +15,6 @@ class Entry {
             title = value;
         }
     } 
-    
-    
     private string body;
     public string Body { 
         get { return body; } 
@@ -29,10 +25,8 @@ class Entry {
             }
             body = value;
         }
-    
     } 
     public string Prompt { get; set; }
-
     public string Date { get; set; }
 
     public Entry() {  // constructor 

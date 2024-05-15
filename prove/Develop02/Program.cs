@@ -52,7 +52,6 @@ class Program
                                 Console.WriteLine("Invalid input, please try again.");
                             }
                         }
-
                     }
                     else {
                         Console.WriteLine("Exiting...");
@@ -64,7 +63,6 @@ class Program
                     break;
             }
         }
-        
     }
     public static void displayMenu() {
         Console.WriteLine("\n1. Add Journal Entry");

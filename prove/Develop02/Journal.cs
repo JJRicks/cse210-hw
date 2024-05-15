@@ -11,7 +11,7 @@ using System.Security.AccessControl;
 class Journal {
 
     // declare variables
-    //master list of entries
+    // master list of entries
     List<Entry> entries = new List<Entry>();
     Prompt entryPrompt = new Prompt();
     DateTime theCurrentTime = DateTime.Now;
@@ -23,9 +23,6 @@ class Journal {
         string selectedPrompt = entryPrompt.GetPrompt();
         Console.WriteLine($"\nExample prompt: {selectedPrompt}");
         // interact with the entries class, add user inputs
-        
-        
-        // add logic and loop to validate entry title, try catch with get set? is that stupid idk
         while (true) {
             try {
                 Console.Write("Journal entry title: ");
@@ -36,7 +33,6 @@ class Journal {
                 Console.WriteLine(e.Message);
             }     
         }
-
         while (true) {
             try {
                 Console.Write("Journal entry: ");
@@ -50,7 +46,6 @@ class Journal {
         entry.Prompt = selectedPrompt;
         entry.Date = dateText;
         entries.Add(entry);
-        
     }
     public void displayEntries() {
         // show a truncated list of all current entries and then 
@@ -95,7 +90,6 @@ class Journal {
         string[] files = Directory.GetFiles(currentDirectory);
         int fileSelection;
         string jsonString;
-
         List<string> jsonFilesList = new List<string>();
 
         foreach (string file in files) {
@@ -119,7 +113,6 @@ class Journal {
                 Console.WriteLine("Not a valid file number, please try again.");
             }
         }
-
         entries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
         Console.WriteLine("Entries loaded successfully.");
     }
