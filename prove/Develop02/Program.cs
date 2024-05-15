@@ -43,7 +43,6 @@ class Program
         }
         
     }
-
     public static void displayMenu() {
         Console.WriteLine("\n1. Add Journal Entry");
         Console.WriteLine("2. Display Entries");

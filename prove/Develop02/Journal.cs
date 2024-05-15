@@ -11,10 +11,9 @@ using System.Security.AccessControl;
 class Journal {
 
     // declare variables
-    // entry list
+    //master list of entries
     List<Entry> entries = new List<Entry>();
     Prompt entryPrompt = new Prompt();
- 
     DateTime theCurrentTime = DateTime.Now;
 
     public void addEntry() {
@@ -25,24 +24,41 @@ class Journal {
         Console.WriteLine($"\nExample prompt: {selectedPrompt}");
         // interact with the entries class, add user inputs
         
-        Console.Write("Journal entry title: ");
         
         // add logic and loop to validate entry title, try catch with get set? is that stupid idk
-        entry.Title = Console.ReadLine();
+        while (true) {
+            try {
+                Console.Write("Journal entry title: ");
+                entry.Title = Console.ReadLine();
+                break;
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }     
+        }
 
-        Console.Write("Journal entry: ");
-        entry.Body = Console.ReadLine();
+        while (true) {
+            try {
+                Console.Write("Journal entry: ");
+                entry.Body = Console.ReadLine();
+                break;
+            }
+            catch (Exception e) {
+                Console.WriteLine(e.Message);
+            }
+        }
         entry.Prompt = selectedPrompt;
         entry.Date = dateText;
-
         entries.Add(entry);
+        
     }
     public void displayEntries() {
         // show a truncated list of all current entries and then 
-        Console.WriteLine("\nPlease select an entry to read: (1, 2, 3... 0 to exit)");
+        
         // validate input 
         while (true){
             try {
+                Console.WriteLine("\nPlease select an entry to read: (1, 2, 3... 0 to exit)");
                 foreach (Entry entry in entries) {
                     Console.WriteLine($"#{entry.EntryNumber} {entry.Date}: {entry.Title}");
                 }   
