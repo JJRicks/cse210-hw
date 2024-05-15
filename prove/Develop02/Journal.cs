@@ -5,6 +5,8 @@ using System.IO;
 using System.Text.Json;
 using System.Diagnostics.Tracing;
 using System.Security;
+using System.IO.Enumeration;
+using System.Security.AccessControl;
 
 class Journal {
 
@@ -14,12 +16,6 @@ class Journal {
     Prompt entryPrompt = new Prompt();
  
     DateTime theCurrentTime = DateTime.Now;
-
-
-
-    public Journal() {
-
-    }
 
     public void addEntry() {
         Entry entry = new Entry();
@@ -66,18 +62,50 @@ class Journal {
         }
     }
     public void saveFile() {
-
-        string fileName = "Journal_" + DateTime.Now.ToString("yyyy_M_dd__HH_mm_ss") + ".json";
-        Console.WriteLine(fileName);
-
+        Console.Write("Enter filename to save as: ");
+        string userFileName = Console.ReadLine();
+        string fileName = userFileName + "_" + DateTime.Now.ToString("yyyy_M_dd__HH_mm_ss") + ".json";
         try {
             string jsonString = JsonSerializer.Serialize(entries, new JsonSerializerOptions {WriteIndented = true});
             File.WriteAllText(fileName, jsonString);
 
-            Console.WriteLine("Entries saved to file successfully");
+            Console.WriteLine(fileName + " saved to successfully to " + Directory.GetCurrentDirectory());
         }
         catch {
 
         }
+    }
+    public void loadFile() {
+        string currentDirectory = Directory.GetCurrentDirectory();
+        string[] files = Directory.GetFiles(currentDirectory);
+        int fileSelection;
+        string jsonString;
+
+        List<string> jsonFilesList = new List<string>();
+
+        foreach (string file in files) {
+            if (file.Contains(".json")) {
+                jsonFilesList.Add(file);
+            }
+        }
+        while (true) {
+            Console.WriteLine("\nPlease select a journal file to load: (1, 2, 3... 0 to exit)");
+            for (int i = 0; i < jsonFilesList.Count; i++) {
+                Console.WriteLine($"{i + 1}: {jsonFilesList[i]}");
+            }
+            Console.Write("File number: ");
+
+            try {
+                fileSelection = int.Parse(Console.ReadLine());
+                jsonString = File.ReadAllText(jsonFilesList[fileSelection - 1]);
+                break;
+            }
+            catch {
+                Console.WriteLine("Not a valid file number, please try again.");
+            }
+        }
+
+        entries = JsonSerializer.Deserialize<List<Entry>>(jsonString);
+        Console.WriteLine("Entries loaded successfully.");
     }
 }
