@@ -6,7 +6,7 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Welcome to Journal.");
-        //TODO You have $x unsaved entries 
+
         Journal journal = new Journal();
         int userChoice;
         int unsavedEntries = 0;
@@ -20,7 +20,6 @@ class Program
                 Console.WriteLine("\nNot an int, please try again.\n");
                 continue; 
             }
-            
             switch (userChoice) {
                 case 1:
                     journal.addEntry();

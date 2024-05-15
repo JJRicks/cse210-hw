@@ -25,6 +25,7 @@ class Journal {
         // interact with the entries class, add user inputs
         while (true) {
             try {
+                // ask user for title, check if it's empty and raise exception if so
                 Console.Write("Journal entry title: ");
                 entry.Title = Console.ReadLine();
                 break;
@@ -35,6 +36,7 @@ class Journal {
         }
         while (true) {
             try {
+                // ask user for body text, check if it's empty and raise exception if so
                 Console.Write("Journal entry: ");
                 entry.Body = Console.ReadLine();
                 break;
@@ -43,13 +45,13 @@ class Journal {
                 Console.WriteLine(e.Message);
             }
         }
+        // finish up the entry and push it to the <Entry> list
         entry.Prompt = selectedPrompt;
         entry.Date = dateText;
         entries.Add(entry);
     }
     public void displayEntries() {
-        // show a truncated list of all current entries and then 
-        
+        // show a truncated list of all current entries and then prompt for one to display in full
         // validate input 
         while (true){
             try {
@@ -73,6 +75,7 @@ class Journal {
         }
     }
     public void saveFile() {
+        // prompt user for filename and append current date/time to avoid name conflicts
         Console.Write("Enter filename to save as: ");
         string userFileName = Console.ReadLine();
         string fileName = userFileName + "_" + DateTime.Now.ToString("yyyy_M_dd__HH_mm_ss") + ".json";
