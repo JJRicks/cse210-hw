@@ -78,7 +78,10 @@ class Journal {
         // prompt user for filename and append current date/time to avoid name conflicts
         Console.Write("Enter filename to save as: ");
         string userFileName = Console.ReadLine();
-        string fileName = userFileName + "_" + DateTime.Now.ToString("yyyy_M_dd__HH_mm_ss") + ".json";
+        
+        //string fileName = userFileName + "_" + DateTime.Now.ToString("yyyy_M_dd__HH_mm_ss") + ".json";
+        string fileName = userFileName + ".json"; // you can comment this line and uncomment the other one to prevent files from saving over top of each other
+        
         try {
             string jsonString = JsonSerializer.Serialize(entries, new JsonSerializerOptions {WriteIndented = true});
             File.WriteAllText(fileName, jsonString);
