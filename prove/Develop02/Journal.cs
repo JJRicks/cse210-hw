@@ -83,6 +83,7 @@ class Journal {
         string fileName = userFileName + ".json"; // you can comment this line and uncomment the other one to prevent files from saving over top of each other
         
         try {
+            // I used json format to store the objects here, as per the creativity suggestions 
             string jsonString = JsonSerializer.Serialize(entries, new JsonSerializerOptions {WriteIndented = true});
             File.WriteAllText(fileName, jsonString);
             Console.WriteLine(fileName + " saved to successfully to " + Directory.GetCurrentDirectory());
