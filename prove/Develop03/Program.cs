@@ -25,9 +25,9 @@ class Program
                 case "2": // display a scripture for memorization
                     break;
                 case "3": // quit
-                    break;
+                    return;
                 case "quit": // other way to quit
-                    break;
+                    return;
                 default:
                     Console.WriteLine("\nNot a vaild menu selection, please try again.\n");
                     break;
