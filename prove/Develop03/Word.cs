@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Threading.Tasks.Dataflow;
 
 class Word {
@@ -11,4 +12,13 @@ class Word {
     public string getWord() { 
         return WordText;
     }
+
+    public bool getVisibility() {
+        return IsVisible;
+    }
+
+    public void setVisibility(bool visibility) {
+        IsVisible = visibility;
+    }
+        
 }
