@@ -25,6 +25,10 @@ class Scripture {
         return nestedWordsList;
     }
 
+    public List<int> getVerses() {
+        return Verses;
+    }
+
     public string returnReference() {
         // return the full reference with book, chapter, and verses properly formatted
         if (Verses.Count() == 1) {

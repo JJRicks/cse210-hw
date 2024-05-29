@@ -87,9 +87,12 @@ class Reference {
         // progressively hide more words
         
         // int willQuitAfterNoVisibleWordsRunsOnce = 0;
+        bool beginHiding = false;
         while (true) {
             Console.Clear();
             // check visible words and quit if none left
+            
+            
             int visibleWords = 0;
             foreach(List<Word> verse in requestedVersesList) {
                 foreach(Word word in verse){
@@ -125,13 +128,9 @@ class Reference {
             } else {
                 Console.WriteLine($"\n{reference}");
             }
-            
-            // pick the words to be hidden randomly and add them to a list of indicies hidden
-            
+
             List<int> numWordsPerVerse = new List<int>(); // list of ints, each int represents the number of words in each requested verse
             
-            
-
             // count the number of words in each verse and add it to the list keeping track of that
             foreach(List<Word> verse in requestedVersesList) {
                 int numWordsInThisVerse = 0;
@@ -141,36 +140,40 @@ class Reference {
                 numWordsPerVerse.Add(numWordsInThisVerse);
             }
             
-            // pick two random ints to hide based on how many words per verse
-            int indexInVersesList = 0; // index of which verse, which is the list of words
-            foreach(List<Word> verse in requestedVersesList) {
-                //for loop to keep track of the numbers
-                // run it twice to generate the two numbers
-                for (int x = 0; x < 2; x++) {
-                    int randomlyChosenHiddenWordIndex = random.Next(numWordsPerVerse[indexInVersesList]);
-                    int timesThrough = 0;
-                    while(true) {
-                        // this is studid but it works. my big O is gonna be garbage
-                        if(timesThrough > 200) {
-                            break;
+            // it starts hiding words too early. Here's a bandaid fix lol
+            if (beginHiding) {
+                // pick two random ints to hide based on how many words per verse
+                int indexInVersesList = 0; // index of which verse, which is the list of words
+                foreach(List<Word> verse in requestedVersesList) {
+                    // for loop to keep track of the numbers
+                    // run it twice to generate the two numbers
+                    // pick another number if the number is already in the list of hidden word indicies   
+                    for (int x = 0; x < 2; x++) {
+                        int randomlyChosenHiddenWordIndex = random.Next(numWordsPerVerse[indexInVersesList]);
+                        int timesThrough = 0;
+                        while(true) {
+                            // this is studid but it works. my N(O) is gonna be garbage
+                            if(timesThrough > 200) {
+                                break;
+                            }
+                            if(hiddenWordIndicies[indexInVersesList].Contains(randomlyChosenHiddenWordIndex)) {
+                                randomlyChosenHiddenWordIndex = random.Next(numWordsPerVerse[indexInVersesList]);
+                                timesThrough++;
+                            } else {
+                                break;
+                            }
                         }
-                        if(hiddenWordIndicies[indexInVersesList].Contains(randomlyChosenHiddenWordIndex)) {
-                            randomlyChosenHiddenWordIndex = random.Next(numWordsPerVerse[indexInVersesList]);
-                            timesThrough++;
+                        if (timesThrough > 200) {
+                            // don't add the number
                         } else {
-                            break;
+                            hiddenWordIndicies[indexInVersesList].Add(randomlyChosenHiddenWordIndex);
                         }
-                    }
-                    if (timesThrough > 200) {
-                        // don't add the number
-                    } else {
-                        hiddenWordIndicies[indexInVersesList].Add(randomlyChosenHiddenWordIndex);
-                    }
-                }             
-            
-                // // pick another number if the number is already in the list of hidden word indicies    
-                // iterate to the next verse
-                indexInVersesList++;
+                    }              
+                    // iterate to the next verse
+                    indexInVersesList++;
+                }
+            } else {
+                beginHiding = true;
             }
             
             // this will print the randomly generated numbers for purposes of debugging
@@ -219,7 +222,6 @@ class Reference {
                         Console.Write(obscuredWord);
                         Console.Write(" ");
                     }
-                    
                 }
                 Console.WriteLine("\n");
                 
@@ -228,12 +230,25 @@ class Reference {
             Console.ReadLine();
         }
     }
-     
+
     public string listAllScriptures() { // return a string containing the numbered list of all scriptures in the database
         string allScriptures = "";
         for(int i = 0; i < scriptureList.Count(); i++) {
             allScriptures = allScriptures + $"{i + 1}: {scriptureList[i].returnReference()}\n";
         }
         return allScriptures;
+    }
+
+    public (int, List<int>) getRandomScripture() { // return an random int for scripture number and just use all the verses
+        int randomScriptureNumber = random.Next(scriptureList.Count());
+        
+        Console.WriteLine(randomScriptureNumber);
+        List<int> verses = scriptureList[randomScriptureNumber].getVerses();
+
+        return (randomScriptureNumber, verses);
+
+
+
+       
     }
 }

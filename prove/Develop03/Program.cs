@@ -27,6 +27,9 @@ class Program
                     reference.addScripture();
                     break; 
                 case "2": // display a random scripture for memorization
+                    var randomScripture = reference.getRandomScripture();
+
+                    reference.memorizeScripture(randomScripture.Item1, randomScripture.Item2.ToArray());
                     break;
                 case "3":  // display a specific scripture for memorization
                     
@@ -39,8 +42,8 @@ class Program
                     int[] chosenVerses;
                     string userVerseChooseinput;
                     Console.Write("Which verses from the scripture would you like to practice? (type each verse # with a space in between. Ex: 5 6 7): ");
-                    userVerseChooseinput = Console.ReadLine();
-                    // TODO trim spaces lol
+                    userVerseChooseinput = Console.ReadLine().Trim();
+                    
                     chosenVerses = userVerseChooseinput.Split(' ').Select(int.Parse).ToArray();
                     
                     reference.memorizeScripture(chosenScripture, chosenVerses);
