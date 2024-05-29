@@ -28,7 +28,6 @@ class Reference {
         scriptureList.Add(scripture3);
     }
     
-    
     public void addScripture() {
         // get user input to properly set up the scripture, then make a new instance of Scripture, passing all relevant data into the constructor correctly. check input
         string book;
@@ -227,7 +226,12 @@ class Reference {
                 
                 i++;
             }
-            Console.ReadLine();
+            Console.WriteLine("Press enter to continue or type 'quit' to finish:");
+            string willContinue = Console.ReadLine();
+            if (willContinue == "quit") {
+                Console.Clear();
+                return;
+            }
         }
     }
 
@@ -246,9 +250,5 @@ class Reference {
         List<int> verses = scriptureList[randomScriptureNumber].getVerses();
 
         return (randomScriptureNumber, verses);
-
-
-
-       
     }
 }
