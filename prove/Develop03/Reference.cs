@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
+using System.Text.Json.Serialization;
 
 class Reference {
     private List<Scripture> scriptureList = new List<Scripture>();
@@ -24,9 +25,14 @@ class Reference {
         List<string> scripture3verses = new List<string> {"Now ye may suppose that this is foolishness in me; but behold I say unto you, that by small and simple things are great things brought to pass; and small means in many instances doth confound the wise. ", "And the Lord God doth work by means to bring about his great and eternal purposes; and by very small means the Lord doth confound the wise and bringeth about the salvation of many souls. "};
         Scripture scripture3 = new Scripture("Alma", 37, scripture3list, scripture3verses);
 
+        List<int> scripture4list = new List<int> {16, 17};
+        List<string> scripture4verses = new List<string> {"For behold, the Spirit of Christ is given to every man, that he may know good from evil; wherefore, I show unto you the way to judge; for every thing which inviteth to do good, and to persuade to believe in Christ, is sent forth by the power and gift of Christ; wherefore ye may know with a perfect knowledge it is of God.", "But whatsoever thing persuadeth men to do evil, and believe not in Christ, and deny him, and serve not God, then ye may know with a perfect knowledge it is of the devil; for after this manner doth the devil work, for he persuadeth no man to do good, no, not one; neither do his angels; neither do they who subject themselves unto him. "};
+        Scripture scripture4 = new Scripture("Moroni", 7, scripture4list, scripture4verses);
+
         scriptureList.Add(scripture1);
         scriptureList.Add(scripture2);
         scriptureList.Add(scripture3);
+        scriptureList.Add(scripture4);
     }
     public void addScripture() {
         // get user input to properly set up the scripture, then make a new instance of Scripture, passing all relevant data into the constructor correctly. check input
