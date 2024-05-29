@@ -11,7 +11,6 @@ class Program
         
         Console.Clear();
         while (true) {
-            
             Console.WriteLine("\nWelcome to scripture memorizer. Please select from the following options: (1, 2, 3 or quit)");
             Console.WriteLine("1: Add a scripture to the database");
             Console.WriteLine("2: Display a random scripture for memorization");

@@ -7,7 +7,8 @@ class Reference {
     private List<Scripture> scriptureList = new List<Scripture>();
     public Random random = new Random();
 
-    List<List<int>> hiddenWordIndicies = new List<List<int>> { new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>()}; // keeps track of all the hidden word numbers in a 2D list. I know this is stupid and inefficient but I'm going crazy
+    // keeps track of all the hidden word numbers in a 2D list. The very definition of "this is stupid but it works" Also I'm going crazy 
+    List<List<int>> hiddenWordIndicies = new List<List<int>> { new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>(), new List<int>()}; 
     
     public Reference() {
         // define default scriptures     
@@ -27,7 +28,6 @@ class Reference {
         scriptureList.Add(scripture2);
         scriptureList.Add(scripture3);
     }
-    
     public void addScripture() {
         // get user input to properly set up the scripture, then make a new instance of Scripture, passing all relevant data into the constructor correctly. check input
         string book;
@@ -72,8 +72,6 @@ class Reference {
         Scripture userAddedScripture = new Scripture(book, chapterNumber, verses, verseTexts);
         scriptureList.Add(userAddedScripture);  
     }
-    
-
     // logic to choose which verses
     public void memorizeScripture(int scriptureNumber, int[] chosenVerses) {
        // nah let's not pull the entire list of lists, just pull one Word list instead.
@@ -90,8 +88,6 @@ class Reference {
         while (true) {
             Console.Clear();
             // check visible words and quit if none left
-            
-            
             int visibleWords = 0;
             foreach(List<Word> verse in requestedVersesList) {
                 foreach(Word word in verse){
@@ -120,16 +116,13 @@ class Reference {
                         intList.Clear();
                     }
                     return;
-                } else {
-                    
+                } else {   
                 }
                 //willQuitAfterNoVisibleWordsRunsOnce++;
             } else {
                 Console.WriteLine($"\n{reference}");
             }
-
             List<int> numWordsPerVerse = new List<int>(); // list of ints, each int represents the number of words in each requested verse
-            
             // count the number of words in each verse and add it to the list keeping track of that
             foreach(List<Word> verse in requestedVersesList) {
                 int numWordsInThisVerse = 0;
@@ -138,7 +131,6 @@ class Reference {
                 }
                 numWordsPerVerse.Add(numWordsInThisVerse);
             }
-            
             // it starts hiding words too early. Here's a bandaid fix lol
             if (beginHiding) {
                 // pick two random ints to hide based on how many words per verse
@@ -188,7 +180,6 @@ class Reference {
             int verseIndex = 0;
             int wordIndex = 0;
             // go through each verse and word 
-
             // somehow deal with the empty lists
             // actually not necessary whatever
             foreach(List<Word> verse in requestedVersesList) {
@@ -202,7 +193,6 @@ class Reference {
                 wordIndex = 0;
                 verseIndex++;
             }
-
             // count the number of visible words and exit after running one more time if the number is zero
             int i = 0;
             // take the requested verses, then check visibility and hide words that are set to false. Then print them out
@@ -223,7 +213,6 @@ class Reference {
                     }
                 }
                 Console.WriteLine("\n");
-                
                 i++;
             }
             Console.WriteLine("Press enter to continue or type 'quit' to finish:");
@@ -234,7 +223,6 @@ class Reference {
             }
         }
     }
-
     public string listAllScriptures() { // return a string containing the numbered list of all scriptures in the database
         string allScriptures = "";
         for(int i = 0; i < scriptureList.Count(); i++) {
@@ -242,13 +230,10 @@ class Reference {
         }
         return allScriptures;
     }
-
     public (int, List<int>) getRandomScripture() { // return an random int for scripture number and just use all the verses
         int randomScriptureNumber = random.Next(scriptureList.Count());
-        
         Console.WriteLine(randomScriptureNumber);
         List<int> verses = scriptureList[randomScriptureNumber].getVerses();
-
         return (randomScriptureNumber, verses);
     }
 }
