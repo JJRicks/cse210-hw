@@ -38,13 +38,22 @@ class Scripture {
     public List<List<Word>> ReturnRequestedVerses(int[] requestedVerses) {
         // return the specific verses
         List<List<Word>> versesToReturnList = new List<List<Word>>();
-        int i = 0;
+        
+        // right now the loop is only checking from the first verse
+        // what we need: pipe in the int[] requested verses from the user. Compare that to the int[] list of all verses in the scripture
+        // for the numbers that match, and use their list indicies to pull the words list into the other words list 
+
         foreach(int requestedVerse in requestedVerses) {
-            if(requestedVerse == Verses[i]) {
-                versesToReturnList.Add(nestedWordsList[i]);
+            int index = Verses.IndexOf(requestedVerse);
+
+            if (index >= 0) {
+                // Console.WriteLine($"Yes! The verse was found at index {index}");
                 
+            } else {
+                // Console.WriteLine("The verse was not found");
+                throw new Exception("No such verse was found in the selcted scripture.");
             }
-            i++;
+            versesToReturnList.Add(nestedWordsList[index]);
         }
         
         return versesToReturnList; 
@@ -61,10 +70,10 @@ class Scripture {
         foreach(string fullVerse in listOfVersesInReference) {
             // this one will make a strings list, then convert it to a Word list and throw that in to the associated Word list for the verse
             List<string> wordsInIndividualVerse = fullVerse.Split(' ').ToList();
-            // Word list of words in the individual verse, then add this to the top list of nestedWordsList
+            // Word list of words in the individual verse, then add this to the list of nestedWordsList
             List<Word> verseWordsList = new List<Word>();
             foreach(string word in wordsInIndividualVerse) {
-                Word verseWord = new Word(word, false);
+                Word verseWord = new Word(word, true);
                 verseWordsList.Add(verseWord);
             }
             nestedWordsList.Add(verseWordsList);

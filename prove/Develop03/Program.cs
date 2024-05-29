@@ -9,7 +9,7 @@ class Program
     {
         Reference reference = new Reference();
         
-        //Console.Clear();
+        Console.Clear();
         while (true) {
             
             Console.WriteLine("\nWelcome to scripture memorizer. Please select from the following options: (1, 2, 3 or quit)");
@@ -31,9 +31,8 @@ class Program
                 case "3":  // display a specific scripture for memorization
                     
                     int chosenScripture;
-                    Console.WriteLine("\nWhich scripture would you like to work on? Here is the current list: ");
                     Console.WriteLine(reference.listAllScriptures());
-                    // TODO add a part saying which verses do you want
+                    
                     Console.Write("Chosen scripture (1, 2, 3, 4, etc.): ");
                     chosenScripture = int.Parse(Console.ReadLine()) - 1;
                     
