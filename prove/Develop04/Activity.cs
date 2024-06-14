@@ -1,4 +1,5 @@
-public abstract class Activity {
+// not abstracting activity since I want to use one of the methods in the program class
+public class Activity {
 
     protected int sessionLength = 0;
     protected string activityName = "";
