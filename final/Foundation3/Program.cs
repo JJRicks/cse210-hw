@@ -14,8 +14,13 @@ class Program
 
     static void PrintEventDetails(Event eventInstance)
     {
+        Console.WriteLine("\nStandard details");
         Console.WriteLine(eventInstance.GetStandardDetails());
+
+        Console.WriteLine("\nFull details");
         Console.WriteLine(eventInstance.GetFullDetails());
+
+        Console.WriteLine("Short description:");
         Console.WriteLine(eventInstance.GetShortDescription());
         Console.WriteLine();
     }
